@@ -1,0 +1,121 @@
+
+.allYourFriendName {
+  /* border: 1px solid #4f3f5c; */
+  background-color: #4f3f5c;
+  width: 15%;
+  height: auto; /* Let content determine height */
+  color: white;
+  margin-top: 6vh;
+}
+
+.onlineUsers {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.allFriends {
+  max-height: 89.5vh; 
+  overflow-y: auto;
+}
+
+/* Customize Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #328da8;
+}
+
+.name {
+  border-bottom: 1px solid #328da8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.userNameImage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userNameImage img {
+  width: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.onlineMessageUpdate {
+  margin: 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.online {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.Message {
+  font-size: 12px;
+  width: 15px;
+  height: 15px;
+  background-color: #4f3f5c;
+  border-radius: 50%;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 900px) {
+  .allYourFriendName {
+    width: 30%;
+    /* height: auto; No need to change the height here */
+  }
+
+  .allFriends {
+    max-height: 91.5vh; /* Adjust max-height for smaller screens */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body{
+    background-color: #4f3f5c;
+  }
+  .onlineUsers{
+    border-bottom: 1px solid grey;
+    font-size: 15px;
+    padding: 5px;
+  }
+  .allYourFriendName {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 8vh;
+    z-index: 1;
+  }
+
+  .allFriends {
+    max-height: 86vh; 
+  }
+
+  .name {
+    padding: 5px 10px;
+  }
+
+  .userNameImage img {
+    margin-right: 20px;
+  }
+}

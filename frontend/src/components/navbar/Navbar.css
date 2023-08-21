@@ -1,0 +1,286 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+}
+
+.userNavbar {
+  /* border: 1px solid red; */
+  background-color: #4f3f5c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 6vh;
+  top: 0;
+  left: 0;
+}
+
+.leftNavbar {
+  /* border: 1px solid red; */
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin: 10px;
+}
+.leftNavbar img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.rightNavbar {
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin: 15px;
+}
+.logoIcons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.teamLogo {
+  position: relative;
+}
+.numberUsers, .numberRequests {
+  /* border: 1px solid red; */
+  padding: 0px 10px; 
+}
+.allUsersName {
+  border: 1px solid grey;
+  background-color: #4f3f5c;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 350px;
+  display: none;
+  transition: all 0.5s;
+  height: 500px;
+  overflow-y: auto;
+}
+.child-allUsersName{
+  /* border: 1px solid blue; */
+  text-align: center;
+  padding: 5px;
+}
+
+.numberUsers:hover ~ .allUsersName,
+.allUsersName:hover {
+  display: block;
+}
+
+.userDetail {
+  border: 1px solid #775e8b;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+.userDetail img {
+  width: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userDetail p {
+  font-size: 15px;
+}
+
+.sendRequestButton {
+  position: relative;
+  color: white;
+}
+.sendRequestButton button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #434986;
+  color: white;
+  border: 0px;
+  cursor: pointer;
+}
+.sendRequestButton button:hover {
+  background-color: #2c6b6b;
+}
+.sendRequestButton span {
+  font-size: 10px;
+  position: absolute;
+  color: red;
+  top: -3px;
+  right: 0px;
+}
+
+.notificationDetail {
+  
+  position: relative;
+}
+
+.allUsersNameSended {
+  border: 1px solid grey;
+  background-color: #4f3f5c;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 350px;
+  display: none;
+  height: 500px;
+  overflow-y: auto;
+}
+.child-allUsersNameSended{
+  text-align: center;
+  padding: 5px;
+}
+
+.numberRequests:hover ~ .allUsersNameSended,
+.allUsersNameSended:hover {
+  display: block;
+}
+
+.userSended {
+  border: 1px solid #775e8b;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+.userSended p{
+  font-size: 15px;
+}
+.userSended button{
+  border: 0px;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.userSended button:nth-child(3){
+  background-color: green;
+}
+.userSended button:nth-child(4){
+  background-color: #eb0744;
+}
+
+.userSended button:nth-child(3):hover{
+  background-color: green;
+}
+.userSended button:nth-child(4):hover{
+  background-color: #fa0553;
+}
+
+.numberRequests span {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  font-size: 12px;
+  color: #eb0744;
+}
+.numberUsers span{
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  font-size: 12px;
+  color: #eb0744;
+}
+
+.userSended img {
+  width: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navActive {
+  display: block;
+}
+
+.ai {
+  font-size: 25px;
+}
+.ai:hover {
+  color: #076deb;
+}
+.ai:last-child:hover {
+  color: #eb0744;
+}
+.toggleNav {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .leftNavbar {
+    width: auto;
+    margin: 15px;
+  }
+  .rightNavbar {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .userNavbar{
+    /* border: 1px solid #076deb; */
+    padding: 5px 0px;
+    z-index: 3;
+  }
+  .leftNavbar {
+    width: auto;
+    padding: 0px;
+    font-size: 12px;
+  }
+  .rightNavbar {
+    width: auto;
+    position: relative;
+  }
+  .logoIcons {
+    border: 1px solid grey;
+    background-color: #4f3f5c;
+    position: absolute;
+    flex-direction: column;
+    top: 4vh;
+    width: 50px;
+    height: 150px;
+    right: -15px;
+    padding: 15px 0px;
+    transform: translateX(100%);
+    transition: all 0.5s;
+  }
+  .logoIcons.active {
+    transform: translate(0);
+  }
+  .logoIcons .ai{
+    font-size: 20px;
+  }
+  .toggleNav {
+    /* border:1px solid red; */
+    font-size: 20px;
+    display: block;
+  }
+  .allUsersName {
+    
+    top: 30px;
+    right: 40px;
+    width: 300px;
+    height: 400px;
+  }
+  .allUsersNameSended {
+    top: 30px;
+    right: 40px;
+    width: 300px;
+    height: 400px;
+  }
+  .userSended button{
+    border: 0px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+}

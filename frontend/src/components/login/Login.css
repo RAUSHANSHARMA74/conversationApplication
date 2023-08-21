@@ -1,0 +1,56 @@
+.userLoginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #25a9ad0a, #DB4437, #31caca);
+  }
+  
+  .pageTitle {
+    text-align: center;
+    margin-top: 40px;
+    background: linear-gradient(to bottom right, #18c918, #285161f3, #1877F2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  
+  .loginButton {
+    /* border: 1px solid red; */
+    margin-top: 35vh;
+    display: grid;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .loginBtn {
+    padding: 15px 50px;
+    display: block;
+    border: none;
+    background: teal;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .loginBtn:hover {
+    background-color: #2980b9;
+  }
+  
+  @media screen and (max-width: 900px){
+    .loginButton{
+        margin-top: 30vh;
+    }
+  }
+
+  @media screen and (max-width: 600px){
+    .loginButton{
+        margin-top: 30vh;
+    }
+    .loginBtn{
+        font-size: 15px;
+    }
+  }
