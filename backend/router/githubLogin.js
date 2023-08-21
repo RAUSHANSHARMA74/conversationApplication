@@ -51,7 +51,9 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      // callbackURL: "/auth/github/callback",
+      callbackURL: "https://conversationbackend.onrender.com/auth/github/callback",
+
       scope: ["user:email"], // Request the 'user:email' scope to get the user's email
     },
     async function (accessToken, refreshToken, profile, done) {

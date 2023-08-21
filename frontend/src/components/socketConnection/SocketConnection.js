@@ -1,12 +1,19 @@
 import io from 'socket.io-client';
 
 const token = localStorage.getItem("token");
-const socket = io.connect("http://localhost:3571/", {
+// const socket = io.connect("http://localhost:3571/", {
+//   auth: {
+//     token: token,
+//   },
+// });
+
+const socket = io.connect("https://conversationbackend.onrender.com/", {
   auth: {
     token: token,
   },
 });
-const loginUrl = "/login";
+
+// const loginUrl = "/login";
 socket.on('connect', () => {
   console.log('Connected to Socket.IO server');
   // Perform actions that require the authenticated socket connection

@@ -5,7 +5,9 @@ import { BiAddToQueue, BiSmile } from "react-icons/bi";
 import socket from "../socketConnection/SocketConnection"
 
 
-const url = "http://localhost:3571";
+// const url = "http://localhost:3571";
+const url = "https://conversationbackend.onrender.com";
+
 
 function Chat({ userChat, setUserChat, userId, onlineUserId }) {
     // console.log(userId, )
