@@ -185,9 +185,12 @@
   .myMessage {
     max-width: 70%;
   }
-
+  .messageTime{
+    /* border: 1px solid red; */
+    font-size: 12px;
+  }
   .messageText {
-    font-size: 13px;
+    font-size: 16px;
   }
   .sendMessage {
     border-radius: 10px;
@@ -197,6 +200,7 @@
   .sendMessage .ai{
     font-size: 20px;
   }
+  
 
   .sendMessage input {
     width: 65%;

@@ -68,16 +68,15 @@ passport.use(
       }
       // console.log(profile)
       var token = jwt.sign({userE : profile.emails[0].value }, process.env.secret, { expiresIn: '1h' });
+      let data = await ChatUserModel.findOne({id : githubInformation.id});
       try {
-        let data = await ChatUserModel.findOne({id : githubInformation.id});
         if (data == null) {
           let newChatUser = new ChatUserModel(githubInformation);
           await newChatUser.save();
-          done(null, "Login successful");
+          done(null, token);
         } else {
-          await ChatUserModel.findByIdAndUpdate(githubInformation.id, githubInformation);
-          localStorage.setItem("token", token)
-          done(null, "Login successful");
+          await ChatUserModel.findByIdAndUpdate(data._id, githubInformation);
+          done(null, token);
         }
       } catch (error) {
         done(error, false);
@@ -95,12 +94,10 @@ githubLoginRouter.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/auth/fail" }),
   (req, res) => {
-    if (req.isAuthenticated()) {
-    res.redirect("/github/users")
-    console.log("login")
-    } else {
-      res.redirect("/auth/fail");
-    }
+    const token = req.user; 
+    // res.redirect("/auth/fail");
+    // res.redirect(`http://localhost:3000/Login/?token=${token}`);
+    res.redirect(`https://conversationfrontend.onrender.com/Login/?token=${token}`);
   }
 );
 

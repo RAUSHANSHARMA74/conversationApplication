@@ -15,11 +15,9 @@ const io = new Server(server, {
 io.use(socketAuthorization);
 var allUsersStatus = []
 io.on("connection", async (socket) => {
-  console.log(`A user connected`);
   const userDetailId = socket.userDetail._id.toString();
   // Fetch all user details except the current user
-  socket.on("send", async (data) => {
-    console.log(data);
+  socket.on("send", async () => {
     try {
       const otherUsers = await ChatUserModel.find().populate({
         path: "friendRequestsSent.myDetail friendRequestsReceived.userDetail",

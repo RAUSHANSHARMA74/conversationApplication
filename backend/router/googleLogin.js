@@ -47,7 +47,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      // callbackURL: "/auth/google/callback",
       callbackURL: "https://conversationbackend.onrender.com/auth/google/callback",
 
     },
@@ -91,7 +91,8 @@ googleLoginRouter.get(
   passport.authenticate("google", { failureRedirect: "/auth/fail" }),
   (req, res) => {
     const token = req.user; 
-    res.redirect(`http://localhost:3000/Login/?token=${token}`);
+    // res.redirect(`http://localhost:3000/Login/?token=${token}`);
+    res.redirect(`https://conversationfrontend.onrender.com/Login/?token=${token}`);
   }
 );
 
