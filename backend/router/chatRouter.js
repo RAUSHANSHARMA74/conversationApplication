@@ -2,13 +2,14 @@ const express = require("express");
 const { socketAuthorization } = require("../middleware/socketAuthentication");
 const { ChatUserModel, MessageModel } = require("../model/userModel");
 const app = express();
+require("dotenv").config()
 const http = require("http");
 const { Server } = require("socket.io");
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.REDIRECT_FRONTEND,
     methods: ["GET", "POST"],
   },
 });

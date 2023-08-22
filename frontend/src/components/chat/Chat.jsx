@@ -11,7 +11,7 @@ const url = "https://conversationbackend.onrender.com";
 
 function Chat({ userChat, setUserChat, userId, onlineUserId }) {
     // console.log(userId, )
-    const [online, setOnline] = useState(true)
+    // const [online, setOnline] = useState(true)
     const [video, setVideo] = useState(false)
     const [call, setCall] = useState(true)
     const [inputValue, setInputValue] = useState("");
