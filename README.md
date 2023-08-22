@@ -21,11 +21,27 @@ Welcome to the Conversation Application! This is a chat application that allows 
 
    ```bash
    git clone https://github.com/RAUSHANSHARMA74/conversationApplication.git
+   
+2. Clone the repository:
+
+   ```bash
    cd conversation-application
+   
+3. Clone the repository:
+
+   ```bash
    cd frontend
    npm install
+   
+4. Clone the repository:
+
+   ```bash
    cd backend
    npm install
+   
+5. Clone the repository:
+
+   ```bash
    PORT=<backend_port>
    MONGODB_URI=<your_mongodb_connection_string>
    SECRET_KEY=<your_secret_key_for_jwt>
