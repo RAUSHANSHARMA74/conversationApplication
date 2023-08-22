@@ -23,23 +23,11 @@ Welcome to the Conversation Application! This is a chat application that allows 
    git clone https://github.com/RAUSHANSHARMA74/conversationApplication.git
    cd conversation-application
    cd frontend
-npm install
-cd backend
-npm install
-PORT=<backend_port>
-MONGODB_URI=<your_mongodb_connection_string>
-SECRET_KEY=<your_secret_key_for_jwt>
-REDIRECT_FRONTEND=<your_frontend_url>
-npm run dev
-Screenshots
-<!-- Add screenshots of your application in action -->
-Project Structure
-frontend/: Frontend codebase using React
-backend/: Backend codebase using Node.js and Express.js
-docs/: Documentation files (images, diagrams, etc.)
-Known Issues
-...
-Future Enhancements
-...
-Author
-Your Name
+   npm install
+   cd backend
+   npm install
+   PORT=<backend_port>
+   MONGODB_URI=<your_mongodb_connection_string>
+   SECRET_KEY=<your_secret_key_for_jwt>
+   REDIRECT_FRONTEND=<your_frontend_url>
+   npm run dev
