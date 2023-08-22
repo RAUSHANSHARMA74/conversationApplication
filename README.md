@@ -29,12 +29,14 @@ To get the Conversation Application up and running on your local machine, follow
    ```bash
    cd frontend
    npm install
+   npm start
 
 3. Install backend dependencies:
 
    ```bash
    cd backend
    npm install
+   npm run server
 
 4. Set up environment variables:
 
