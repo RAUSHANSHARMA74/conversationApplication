@@ -17,33 +17,41 @@ Welcome to the Conversation Application! This is a chat application that allows 
 
 ## Setup Instructions
 
+To get the Conversation Application up and running on your local machine, follow these steps:
+
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/RAUSHANSHARMA74/conversationApplication.git
-   
-2. Clone the repository:
 
-   ```bash
-   cd conversation-application
-   
-3. Clone the repository:
+2. Install frontend dependencies:
 
    ```bash
    cd frontend
    npm install
-   
-4. Clone the repository:
+
+3. Install backend dependencies:
 
    ```bash
    cd backend
    npm install
-   
-5. Clone the repository:
+
+4. Set up environment variables:
 
    ```bash
-   PORT=<backend_port>
-   MONGODB_URI=<your_mongodb_connection_string>
-   SECRET_KEY=<your_secret_key_for_jwt>
-   REDIRECT_FRONTEND=<your_frontend_url>
-   npm run dev
+   port = 2415
+   mongodb = "mongodb+srv://Example:<password>@cluster0.dqcvoon.mongodb.net/<Your Database name>?retryWrites=true&w=majority"
+   SECRET_KEY = "anythings"
+   saltroud = 6
+   GOOGLE_CLIENT_ID = "Create Google Client_Id"
+   GOOGLE_CLIENT_SECRET = "Create Google Client_Secret"
+   GITHUB_CLIENT_ID = "Create Github Client_id"
+   GITHUB_CLIENT_SECRET = "Create Github Client_Secret"
+   REDIRECT_URL = "http://localhost:2415"
+   REDIRECT_FRONTEND = "http://localhost:3000/"
+   
+4. Open your browser and navigate to:
+
+   ```bash
+   http://localhost:3000/
+
