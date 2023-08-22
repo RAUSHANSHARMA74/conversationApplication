@@ -52,7 +52,7 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       // callbackURL: "/auth/github/callback",
-      callbackURL: "https://conversationbackend.onrender.com/auth/github/callback",
+      callbackURL: `${process.env.REDIRECT_URL}/auth/github/callback`,
 
       scope: ["user:email"], // Request the 'user:email' scope to get the user's email
     },
@@ -97,7 +97,7 @@ githubLoginRouter.get(
     const token = req.user; 
     // res.redirect("/auth/fail");
     // res.redirect(`http://localhost:3000/Login/?token=${token}`);
-    res.redirect(`https://conversationfrontend.onrender.com/Login/?token=${token}`);
+    res.redirect(`${process.env.REDIRECT_FRONTEND}/Login/?token=${token}`);
   }
 );
 
