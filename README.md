@@ -20,4 +20,4 @@ Welcome to the Conversation Application! This is a chat application that allows 
 1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/RAUSHANSHARMA74/conversationApplication.git
