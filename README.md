@@ -15,6 +15,23 @@ Welcome to the Conversation Application! This is a chat application that allows 
 - **Frontend:** React, Socket.IO
 - **Backend:** Node.js, Express.js, MongoDB, Socket.IO
 
+## Frontend
+
+The frontend of the Conversation Application is built using React and utilizes the Socket.IO library for real-time communication. Here's an overview of the frontend structure and key components:
+
+### Project Structure
+
+- **src/components:** Contains reusable components used across different parts of the application.
+- **src/pages:** Represents different pages/routes of the application, including authentication, chat, and user details.
+- **src/styles:** Includes CSS and styling files for the application.
+
+### Key Components
+
+- **Login:** Handles user authentication using Google and GitHub accounts. Users can log in using their existing accounts.
+- **ChatHome:** Displays the user's friend list, indicating their online/offline status. Users can click on a friend to initiate conversations.
+- **Conversation:** Provides a real-time chat interface for users to exchange messages with their friends.
+
+
 ## Setup Instructions
 
 To get the Conversation Application up and running on your local machine, follow these steps:
