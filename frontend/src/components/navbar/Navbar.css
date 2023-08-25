@@ -212,6 +212,9 @@
 .toggleNav {
   display: none;
 }
+.fullScreen{
+  display: none;
+}
 
 @media screen and (max-width: 900px) {
   .leftNavbar {
@@ -225,7 +228,7 @@
 
 @media screen and (max-width: 600px) {
   .userNavbar{
-    /* border: 1px solid #076deb; */
+    border: 1px solid #076deb;
     padding: 2px 5px;
     z-index: 2;
   }
@@ -297,6 +300,13 @@
     font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .fullScreen{
+    display: block;
+    font-size: 30px;
+    margin-left: 15vh;
+    margin-top: 10px;
   }
   
 }

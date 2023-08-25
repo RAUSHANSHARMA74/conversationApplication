@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { AiOutlineSetting, AiOutlineBell, AiOutlineLogin, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineBell, AiOutlineLogin, AiOutlineMenu, AiOutlineClose, AiOutlineFullscreenExit, AiOutlineFullscreen } from "react-icons/ai";
 import { RiTeamLine } from "react-icons/ri";
 import { TbMessages, TbMessagesOff } from "react-icons/tb";
 import { useState, useEffect } from "react";
@@ -17,14 +17,16 @@ function Navbar({ userDetail, setFriends, friends }) {
         requestSend: [],
         requestReceive: []
     });
+    const [screen, setScreen] = useState(true)
 
 
-    if(userDetail===undefined){
-        window.location.href = loginUrl; 
+
+    if (userDetail === undefined) {
+        window.location.href = loginUrl;
     }
 
     const { _id, name, photo, friendRequestsReceived, friendRequestsSent } = userDetail;
-    
+
     const received = userData.requestReceive?.length || 0;
     const all = userData.allUsersData?.length || 0;
 
@@ -141,7 +143,7 @@ function Navbar({ userDetail, setFriends, friends }) {
         }
 
         if (sender._id === _id) {
-            const senderLastFriend = sender.friends[sender.friends.length-1]
+            const senderLastFriend = sender.friends[sender.friends.length - 1]
             setFriends([...friends, senderLastFriend]);
             setUserData(prevState => ({
                 ...prevState,
@@ -149,7 +151,7 @@ function Navbar({ userDetail, setFriends, friends }) {
             }));
         }
         if (receiver._id === _id) {
-            const receiverLastFriend = receiver.friends[receiver.friends.length-1]
+            const receiverLastFriend = receiver.friends[receiver.friends.length - 1]
             setFriends([...friends, receiverLastFriend]);
             setUserData(prevState => ({
                 ...prevState,
@@ -159,11 +161,31 @@ function Navbar({ userDetail, setFriends, friends }) {
         }
     };
 
+    
+
+
+    const toggleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch((err) => {
+                console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+            });
+
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        setScreen(!screen)
+    }
+
     return (
         <div className="userNavbar">
             <div className="leftNavbar">
                 <img src={photo} alt="" />
                 <h2>{name}</h2>
+                <span className="fullScreen">
+                    {screen ? <AiOutlineFullscreen onClick={toggleFullScreen} /> : <AiOutlineFullscreenExit  onClick={toggleFullScreen} />}
+                </span>
             </div>
             <div className="rightNavbar">
                 <div className={`logoIcons ${userData.rightToggle ? "active" : ""}`}>
@@ -180,8 +202,8 @@ function Navbar({ userDetail, setFriends, friends }) {
                                 <p>ALL USERS</p>
                             </div>
                             {userData.allUsersData?.map((elm, index) => {
-                              const isFriendRequestSent = userData.requestSend?.some(request => request.myDetail._id.toString() === elm._id) || false;
-                              const statusCheck = userData.requestSend?.find(request => request.myDetail._id.toString() === elm._id);
+                                const isFriendRequestSent = userData.requestSend?.some(request => request.myDetail._id.toString() === elm._id) || false;
+                                const statusCheck = userData.requestSend?.find(request => request.myDetail._id.toString() === elm._id);
                                 return (
                                     <div className="userDetail" key={index}>
                                         <img src={elm.photo} alt="" />
