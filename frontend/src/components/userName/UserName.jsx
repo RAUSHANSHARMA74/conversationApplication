@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./UserName.css";
 
-function UserName({ userChat, setUserChat, friends, setUserId, onlineUserId }) {
-    const [online, setOnline] = useState(false);
+
+function UserName({ userChat, setUserPhoto, setUserChat, friends, setUserId, onlineUserId }) {
     return (
         <div className="allYourFriendName">
             <div className="onlineUsers">
@@ -17,6 +17,7 @@ function UserName({ userChat, setUserChat, friends, setUserId, onlineUserId }) {
                             className="name"
                             onClick={() => {
                                 setUserChat(true);
+                                setUserPhoto(elm.photo)
                                 setUserId(elm._id);
                             }}
                             key={index} // Add a unique key for each element in the array

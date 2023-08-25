@@ -30,11 +30,6 @@
     }
   }
 
-.container{
-    /* border: 1px solid red; */
-    /* position: relative; */
-}
-
 .userChatSection{
     /* border: 1px solid blue; */
     display: flex;

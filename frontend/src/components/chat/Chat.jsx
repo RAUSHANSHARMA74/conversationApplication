@@ -1,30 +1,71 @@
 import "./Chat.css"
-import { useState, useEffect } from "react"
-import { BsCameraVideo, BsCameraVideoOff, BsSend, BsArrowLeft, BsTelephoneX, BsTelephone } from "react-icons/bs";
+import EmojiPicker from 'emoji-picker-react';
+import { useState, useEffect, useRef } from "react"
+import { BsCameraVideo, BsCameraVideoOff, BsArrowLeft, BsTelephoneX, BsTelephone } from "react-icons/bs";
+import { AiOutlineSend } from "react-icons/ai";
 import { BiAddToQueue, BiSmile } from "react-icons/bi";
+import { FcGallery, FcDocument } from "react-icons/fc";
 import socket from "../socketConnection/SocketConnection"
 
 
-// const url = "http://localhost:3571";
-const url = "https://conversationbackend.onrender.com";
-
-
-function Chat({ userChat, setUserChat, userId, onlineUserId }) {
-    // console.log(userId, )
-    // const [online, setOnline] = useState(true)
+function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
+    const chatContainerRef = useRef(null);
     const [video, setVideo] = useState(false)
     const [call, setCall] = useState(true)
-    const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState([])
     const [receiveUser, setReceiveUser] = useState({})
+    const [inputValue, setInputValue] = useState("");
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [chooseFile, setChooseFile] = useState(false);
+    const [zoom, setZoom] = useState(1);
+    const [bigImage, setBigImage] = useState("")
+    const [openFile, setOpenFile] = useState(false)
 
-  
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () => {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    };
+
     const checkOnline = onlineUserId.some(request => request.userDetailId.toString() === userId);
+
+    const handleImageChange = (event) => {
+        let id = event.target.dataset.id;
+        const selectedFile = event.target.files[0];
+        event.target.value = null;
+        if (selectedFile) {
+            const imageUrl = URL.createObjectURL(selectedFile);
+            socket.emit('sendMessage', { connectionId: id, "type": "image", content: imageUrl });
+        }
+    };
+
+    const handleDocumentChange = (event) => {
+        const id = event.target.dataset.id;
+        const selectedFile = event.target.files[0];
+        event.target.value = null;
+
+        if (selectedFile) {
+            const docUrl = URL.createObjectURL(selectedFile);
+
+            socket.emit('sendMessage', { connectionId: id, type: 'doc', content: docUrl, fileName: selectedFile.name });
+
+        }
+    };
+
 
     const handleSendMessage = (event) => {
         let id = event.target.dataset.id;
-        socket.emit('sendMessage', { connectionId: id, content: inputValue });
+        if (inputValue != "" && inputValue != null) {
+            socket.emit('sendMessage', { connectionId: id, "type": "text", content: inputValue });
+        }
         setInputValue('');
+    };
+
+    const handleEmojiClick = (emojiObject) => {
+        setInputValue(prevValue => prevValue + emojiObject.emoji);
     };
 
     useEffect(() => {
@@ -61,50 +102,152 @@ function Chat({ userChat, setUserChat, userId, onlineUserId }) {
         const formattedDateTime = `${formattedDate}/${formattedTime}`;
         return formattedDateTime;
     };
+    // const 
+    const handleShowImage = (image) => {
+        setBigImage(image)
+        const seeImageBigElement = document.querySelector('.seeImageBig');
 
+        if (seeImageBigElement) {
+            seeImageBigElement.style.display = 'block'; // Show the element
+        }
+    };
+
+
+
+    const handleDoubleClick = () => {
+        setZoom(zoom === 1 ? 1.5 : 1);
+    };
 
     return (
 
-        <div className={`parentChat ${userChat ? 'open' : ''}`}>
+        <div className={`parentChat ${userChat ? 'open' : ''}`} >
+            <div className="seeImageBig" onDoubleClick={handleDoubleClick} >
+                <img
+                    src={bigImage}
+                    alt=""
+                    style={{ transform: `scale(${zoom})` }} 
+                />
+            </div>
             <div className="chatWithPersonalUser"
             >
                 <div className="videoCallSection">
+                    <img src={userPhoto} alt="" />
+                    <span className="showOnlineUser">
+                        {checkOnline ? <span style={{ color: "#11ede6" }}>Online</span> : <span style={{ color: "#ed115a" }}>Offline</span>}
+                    </span>
                     {video ? <BsCameraVideo className="ai" /> : <BsCameraVideoOff className="ai" />}
 
                     {call ? <BsTelephoneX className="ai" /> : <BsTelephone className="ai" />}
-                    <div className="showOnlineUser">
-                        {checkOnline ? <span style={{ color: "#11ede6" }}>Online</span> : <span style={{ color: "#ed115a" }}>Offline</span>}
-                    </div>
-
+                    
                     <BsArrowLeft className="ai leftarrow" onClick={() => setUserChat(!userChat)} />
 
                 </div>
-                <div className="ChatSection">
-                    {/* Friend's Message */}
-                    {messages?.map((elm, index) => (
-                        <div key={index} className={elm.id === userId ? "friendMessage" : "myMessage"}>
-                            <div className="messageTime">{timeFormatted(elm.time)}</div>
-                            <div className="messageText">
-                                {elm.content}
+                <div className="ChatSection" ref={chatContainerRef}>
+                    {messages?.map((message, index) => (
+                        <div key={index} className={message.id === userId ? "friendMessage" : "myMessage"}>
+                            <div className="messageTime">{timeFormatted(message.time)}</div>
+                            <div className="messageContent">
+                                {message.type === 'text' && (
+                                    <div className="messageText">{message.content}</div>
+                                )}
+                                {message.type === 'image' && (
+                                    <img src={message.content} onClick={() => handleShowImage(message.content)} className="privateImage" alt="Sent by user" />
+                                )}
+                                {message.type === 'doc' && (
+                                    <div className="documentContainer">
+                                        <div className="documentIcon">📄</div>
+                                        <div className="documentInfo">
+                                            <div className="documentName">{message.fileName}</div>
+                                            <div className="documentActions">
+                                                <a href={message.content} target="_blank" rel="noopener noreferrer" className="documentLink">
+                                                    View Document
+                                                </a>
+                                                <a href={message.content} download className="documentLink">
+                                                    Download
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
                             </div>
                         </div>
                     ))}
 
+
                 </div>
 
                 <div className="sendMessage">
-                    <span><BiSmile className="ai" /></span>
-                    <span><BiAddToQueue className="ai" /></span>
+                    <span >
+                        <span className={`EmojiPicker${showEmojiPicker ? " emojiOpen" : ""}`} >
+                            <EmojiPicker onEmojiClick={handleEmojiClick} className="emojiContainer" />
+                        </span>
+                        <BiSmile
+                            className="ai"
+                            onClick={() => {
+                                setShowEmojiPicker(!showEmojiPicker);
+                                setChooseFile(false);
+                            }}
+                        />
+
+                    </span>
+                    <span>
+                        <span className={`choosefile${chooseFile ? " open" : ""}`}>
+                            <span>
+                                <label htmlFor="fileImage" ><FcGallery className="gallery" /><p>Photos & Videos</p></label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="fileImage"
+                                    className="Child-choseFile"
+                                    style={{ display: "none", visibility: "hidden" }}
+                                    data-id={receiveUser._id}
+                                    onChange={handleImageChange}
+
+                                />
+                            </span>
+                            <span>
+                                <label htmlFor="document"><FcDocument className="document gallery" /><p>Document</p></label>
+                                <input
+                                    type="file"
+                                    accept=".pdf, .doc, .docx"
+                                    id="document"
+                                    className="Child-choseFile"
+                                    style={{ display: "none", visibility: "hidden" }}
+                                    data-id={receiveUser._id}
+                                    onChange={handleDocumentChange}
+
+                                />
+                            </span>
+                        </span>
+                        <BiAddToQueue
+                            className="ai"
+                            onClick={() => {
+                                setChooseFile(!chooseFile);
+                                setShowEmojiPicker(false);
+                                setOpenFile(!openFile)
+                            }}
+                        />
+                    </span>
                     <input
                         type="text"
                         value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
+                        onClick={() => {
+                            setShowEmojiPicker(false);
+                            setChooseFile(false);
+                            const seeImageBigElement = document.querySelector('.seeImageBig');
+
+                            if (seeImageBigElement) {
+                                seeImageBigElement.style.display = 'none'; // Hide the element
+                            }
+                        }}
+                        onChange={(e) => {
+                            setInputValue(e.target.value);
+                        }}
                         placeholder="Message"
                         required
                     />
-
-                    <BsSend data-id={receiveUser._id} onClick={handleSendMessage} className="ai" />
-
+                    <AiOutlineSend data-id={receiveUser._id} onClick={handleSendMessage} className="ai" />
                 </div>
             </div>
         </div>

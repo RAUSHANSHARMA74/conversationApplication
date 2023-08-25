@@ -34,8 +34,7 @@ passport.deserializeUser((obj, cb) => {
 
 githubLoginRouter.get("/github/users", async (req, res) => {
   try {
-    // let allUsersData = await GithubModel.find();
-    // res.send(allUsersData);
+   
     res.send("hello github")
   } catch (error) {
     console.log("something wrong in /github/users");

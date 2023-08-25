@@ -15,28 +15,12 @@ let socketAuthorization = async (socket, next) => {
           } else {
             let userDetail = await ChatUserModel.findOne({
               id: decoded.userId,
-            }).populate({
-              path: "friendRequestsSent.myDetail friendRequestsReceived.userDetail friends",
-              select: "_id id name email photo friendRequestsSent.status friendRequestsSent.myDetail",
-            });
-    
-            // Transform the data structure
-            if (userDetail) {
-              userDetail = {
-                _id: userDetail._id,
-                id: userDetail.id,
-                name: userDetail.name,
-                email: userDetail.email,
-                photo: userDetail.photo,
-                friends: userDetail.friends,
-                friendRequestsSent: userDetail.friendRequestsSent.map(request => ({
-                  _id: request.myDetail._id,
-                  status: request.status,
-                })),
-                friendRequestsReceived: userDetail.friendRequestsReceived
-              };
-            }
-           
+            })
+              .populate({
+                path: "friends friendRequestsSent.myDetail friendRequestsReceived.userDetail",
+                select: "_id name email photo",
+              })
+              .exec();
             if (userDetail != null) {
               socket.userDetail = userDetail;
               next(); 

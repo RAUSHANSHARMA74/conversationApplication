@@ -19,12 +19,19 @@
   background-color: #2e506e;
   color: white;
 }
-.videoCallSection .ai{
+.videoCallSection .ai {
   font-size: 25px;
+}
+
+.videoCallSection img{
+    width: 30px;
+    margin-right: 25px;
+    margin-left: 10px;
+    border-radius: 50%;
 }
 .showOnlineUser {
   /* border: 1px solid red; */
-  width: 90%;
+  width: 70%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -49,22 +56,19 @@
   padding-left: 15px;
   outline: none;
 }
-.sendMessage button {
-  /* border: 2px solid red; */
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 35px;
-  color: white;
-  background-color: #163a4a;
-  border: 0px;
-  border-radius: 2px;
-  cursor: pointer;
+
+.sendMessage .ai:nth-child(4) {
+  /* border: 1px solid red; */
+  font-size: 35px;
+  width: 100px;
+  background-color: #25d366;
+  border-radius: 50px;
+  padding: 5px;
 }
-.sendMessage button:hover{
-  background-color: #2e506e;
+.sendMessage .ai:nth-child(4):hover {
+  color: blueviolet;
 }
+
 
 .ChatSection {
   /* border: 1px solid red; */
@@ -82,8 +86,78 @@
   border-radius: 8px;
   padding: 8px;
   max-width: 50%;
-  margin: 10px;
+  margin: 2px;
   margin-right: auto;
+  margin-left: 15px;
+}
+
+.EmojiPicker {
+  position: absolute;
+  bottom: 55px;
+  left: 15%;
+  visibility: hidden;
+}
+
+.emojiOpen{
+  visibility: visible;
+}
+
+.privateImage{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+
+.seeImageBig{
+  border: 1px solid grey;
+  position: absolute;
+  width: 60vh;
+  height: 70vh;
+  overflow: hidden; /* Hide overflow when zoomed */
+  cursor: pointer;
+  left: 40%;
+  top: 15%;
+  display: none;
+
+}
+
+.seeImageBig img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.choosefile{
+  border: 1px solid grey;
+  background-color: white;
+  position: absolute;
+  bottom: 60px;
+  width: 170px;
+  border-radius: 5px;
+  /* display: none; */
+  visibility:hidden;
+}
+.open{
+  /* display: block; */
+  visibility: visible;
+}
+
+.choosefile label{
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: grey;
+  padding: 10px 5px; 
+  cursor: pointer;
+}
+.choosefile label:hover{
+  background-color: rgb(231, 222, 222);
+}
+.gallery{
+  font-size: 25px;
+  margin-right: 10px;
 }
 
 .myMessage {
@@ -91,8 +165,9 @@
   border-radius: 8px;
   padding: 8px;
   max-width: 50%;
-  margin: 10px;
+  margin: 2px;
   margin-left: auto;
+  margin-right: 15px;
 }
 
 .messageTime {
@@ -115,7 +190,7 @@
   cursor: pointer;
   color: white;
 }
-.leftarrow{
+.leftarrow {
   display: none;
 }
 
@@ -127,7 +202,7 @@
     /* border: 1px solid red; */
     width: 100%;
   }
-  .videoCallSection .ai{
+  .videoCallSection .ai {
     font-size: 25px;
   }
   .showOnlineUser {
@@ -144,15 +219,16 @@
 
 @media screen and (max-width: 600px) {
   .parentChat {
+    /* border: 1px solid red; */
     position: absolute;
     background-color: white;
     transform: translateX(-100%);
     transition: all 0.5s;
     width: 100%;
     z-index: 2;
-    margin-top: 8vh;
+    margin-top: 6.5vh;
   }
-  .leftarrow{
+  .leftarrow {
     display: block;
   }
 
@@ -163,44 +239,148 @@
   .ChatSection {
     /* border: 1px solid red; */
     width: 100%;
-    height: 80vh;
+    height: 81vh;
   }
-  .videoCallSection .ai{
+  .videoCallSection .ai {
     font-size: 20px;
   }
   .videoCallSection {
     height: 4vh;
     padding: 5px 10px;
-    
+  }
+  .videoCallSection img{
+    width: 30px;
   }
   .showOnlineUser {
-    /* border: 1px solid red; */
-    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: auto;
+  }
+
+  .privateImage{
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+  }
+
+
+
+  /*  */
+
+  .documentContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin: 5px 0;
+  }
+  
+  .documentIcon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .documentInfo {
+    flex-grow: 1;
+  }
+  
+  .documentName {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .documentActions a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .documentActions a:hover {
+    text-decoration: underline;
+  }
+  
+  /*  */
+
+  .seeImageBig{
+    width: 50vh;
+    height: 70vh;
+    left: 5%;
+    top: 15%;
+    display: none;
+  }
+
+  .choosefile{
+    bottom: 45px;
+    width: 150px;
+    left: 0px;
+    border-radius: 5px;
+    transform: translateX(-100%);
+    transition: all 0.5s;
+    /* z-index: ; */
+  }
+  .open{
+    transform: translate(0);
+  }
+
+  .choosefile label{
+    color: grey;
+    padding: 5px; 
+    cursor: pointer;
+  }
+  .choosefile label>p{
+    font-size: 13px;
+  }
+
+  .EmojiPicker {
+    position: absolute;
+    bottom: 15vh;
+    left:3%;
+    font-size: 10px;
+    transform: translateX(-100%);
+    transition: all 0.5s;
+  }
+  
+  .emojiOpen{
+    transform: translate(0);
+  }
+  .emojiContainer{
+    font-size: 20px;
+    color: blue;
   }
 
   .friendMessage {
+    /* border: 1px solid red; */
+    padding: 5px;
     max-width: 70%;
+    margin-right: 3px;
   }
 
   .myMessage {
+    /* border: 1px solid red; */
     max-width: 70%;
+    padding: 5px;
+    margin-right: 3px;
   }
-  .messageTime{
+  .messageTime {
     /* border: 1px solid red; */
     font-size: 12px;
   }
   .messageText {
     font-size: 16px;
+    
   }
   .sendMessage {
+    /* border: 1px solid red; */
     border-radius: 10px;
-    padding: 2px;
+    padding: 2px 10px;
   }
 
-  .sendMessage .ai{
+  .sendMessage .ai {
     font-size: 20px;
   }
-  
 
   .sendMessage input {
     width: 65%;
@@ -209,11 +389,15 @@
     padding-left: 15px;
     border-radius: 20px;
   }
-  .sendMessage .ai:nth-child(4){
-    font-size: 25px;
-    background-color: #141736;
+  .sendMessage .ai:nth-child(4) {
+    /* border: 1px solid red; */
+    font-size: 30px;
+    background-color: #25d366;
+    width: 35px;
+    border-radius: 50px;
+    padding: 3px;
   }
-  .sendMessage .ai:nth-child(4):hover{
-    color:#43ad28;
+  .sendMessage .ai:nth-child(4):hover {
+    color: blueviolet;
   }
 }

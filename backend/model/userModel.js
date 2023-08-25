@@ -14,8 +14,10 @@ const messageSchema = mongoose.Schema({
   sender: { type: mongoose.Schema.Types.ObjectId, ref: 'ChatUsers', required: true },
   receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'ChatUsers', required: true },
   messages: [{
-    id: String,
-    content: String,
+    id: {type : String,  required : true},
+    fileName : {type : String,  required : false},
+    type : {type : String,  required : true},
+    content: {type: String, required : true},
     time: { type: Date, default: Date.now } // Use the appropriate data type
   }]
 });

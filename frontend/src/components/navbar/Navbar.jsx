@@ -1,13 +1,12 @@
 import "./Navbar.css";
 import { AiOutlineSetting, AiOutlineBell, AiOutlineLogin, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { RiTeamLine } from "react-icons/ri";
+import { TbMessages, TbMessagesOff } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 import socket from "../socketConnection/SocketConnection"
 
-
-// const url = "http://localhost:3571";
-// const url = "https://conversationbackend.onrender.com";
+const url = process.env.REACT_APP_API_KEY
 
 
 const loginUrl = "/login";
@@ -19,7 +18,6 @@ function Navbar({ userDetail, setFriends, friends }) {
         requestReceive: []
     });
 
-    // console.log(userData.allUsersData, "i check all users")
 
     if(userDetail===undefined){
         window.location.href = loginUrl; 
@@ -119,16 +117,12 @@ function Navbar({ userDetail, setFriends, friends }) {
         }
 
         if (sender._id === _id) {
-            console.log("sender")
-            console.log(sender, _id);
             setUserData(prevState => ({
                 ...prevState,
                 requestSend: sender.friendRequestsSent
             }));
         }
         if (receiver._id === _id) {
-            console.log("receiver")
-            console.log(receiver, _id);
             setUserData(prevState => ({
                 ...prevState,
                 requestReceive: receiver.friendRequestsReceived
@@ -147,10 +141,7 @@ function Navbar({ userDetail, setFriends, friends }) {
         }
 
         if (sender._id === _id) {
-            console.log(sender, _id);
-            console.log("sender")
             const senderLastFriend = sender.friends[sender.friends.length-1]
-            console.log(senderLastFriend, "senderLastFriend")
             setFriends([...friends, senderLastFriend]);
             setUserData(prevState => ({
                 ...prevState,
@@ -158,10 +149,7 @@ function Navbar({ userDetail, setFriends, friends }) {
             }));
         }
         if (receiver._id === _id) {
-            console.log(receiver, _id);
-            console.log("receiver")
             const receiverLastFriend = receiver.friends[receiver.friends.length-1]
-            console.log(receiverLastFriend, "receiverLastFriend")
             setFriends([...friends, receiverLastFriend]);
             setUserData(prevState => ({
                 ...prevState,
@@ -246,7 +234,6 @@ function Navbar({ userDetail, setFriends, friends }) {
                             </div>
                             {userData.requestReceive?.map((elm, index) => {
                                 elm = elm.userDetail;
-                                // console.log(elm._id)
                                 return (
                                     <div className="userSended" key={index}>
                                         <img src={elm.photo} alt="" />
@@ -265,9 +252,9 @@ function Navbar({ userDetail, setFriends, friends }) {
                 </div>
                 <div className="toggleNav">
                     {userData.rightToggle ? (
-                        <AiOutlineClose onClick={() => setUserData(prevState => ({ ...prevState, rightToggle: !prevState.rightToggle }))} />
+                        <TbMessagesOff onClick={() => setUserData(prevState => ({ ...prevState, rightToggle: !prevState.rightToggle }))} />
                     ) : (
-                        <AiOutlineMenu onClick={() => setUserData(prevState => ({ ...prevState, rightToggle: !prevState.rightToggle }))} />
+                        <TbMessages onClick={() => setUserData(prevState => ({ ...prevState, rightToggle: !prevState.rightToggle }))} />
                     )}
 
                 </div>

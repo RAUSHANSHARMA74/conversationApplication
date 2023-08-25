@@ -115,7 +115,19 @@
     padding: 5px 10px;
   }
 
-  .userNameImage img {
-    margin-right: 20px;
+  .userNameImage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
   }
+  
+  .userNameImage img {
+    width: 40px;
+    margin-right: 25px;
+    margin-left: 10px;
+    border-radius: 50%;
+  }
+
+ 
 }

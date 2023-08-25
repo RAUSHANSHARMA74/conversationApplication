@@ -5,13 +5,14 @@ import UserName from "../userName/UserName";
 import { useState, useEffect } from "react";
 import socket from "../socketConnection/SocketConnection"
 
-// const url = "http://localhost:3571";
-const url = "https://conversationbackend.onrender.com";
+
+const url = process.env.REACT_APP_API_KEY
 
 const loginUrl = "/login";
 
 function ChatHome() {
     const [userChat, setUserChat] = useState(false);
+    const [userPhoto, setUserPhoto] = useState("")
     const [userDetail, setUserDetail] = useState({});
     const [friends, setFriends] = useState([])
     const [loading, setLoading] = useState(false);
@@ -74,9 +75,9 @@ function ChatHome() {
         <div className="container">
             <Navbar userDetail={userDetail} setFriends={setFriends} friends={friends} />
             <div className="userChatSection">
-                <UserName userChat={userChat} setUserChat={setUserChat} friends={friends} setUserId={setUserId} userId={userId} onlineUserId={onlineUserId} setOnline={setOnline}/>
+                <UserName userChat={userChat} setUserPhoto={setUserPhoto} setUserChat={setUserChat} friends={friends} setUserId={setUserId} userId={userId} onlineUserId={onlineUserId} setOnline={setOnline}/>
                 {userChat ? (
-                    <Chat userChat={userChat} setUserChat={setUserChat} userDetail={userDetail} userId={userId} onlineUserId={onlineUserId} />
+                    <Chat userChat={userChat} setUserChat={setUserChat} userPhoto={userPhoto} userDetail={userDetail} userId={userId} onlineUserId={onlineUserId} />
                 ) : (
                     <div className="catbox">
                         <h1>This Is Chat Box</h1>

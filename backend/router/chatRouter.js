@@ -265,13 +265,14 @@ io.on("connection", async (socket) => {
     }
   });
 
-  socket.on("sendMessage", async ({ connectionId, content }) => {
+  socket.on("sendMessage", async ({ connectionId, type, content }) => {
     try {
+      // console.log(connectionId, type, content)
       const currentUserId = socket.userDetail._id.toString();
       const saveMessage = await MessageModel.findByIdAndUpdate(
         connectionId,
         {
-          $push: { messages: { id: currentUserId, content } },
+          $push: { messages: { id: currentUserId, type, content } },
         },
         { new: true }
       );
@@ -281,7 +282,6 @@ io.on("connection", async (socket) => {
     }
   });
   
-  // const allUsersStatus = []
   socket.on('userLogin', () => {
     allUsersStatus.push({ userDetailId, status: true });
     io.emit('userStatusChange', allUsersStatus);

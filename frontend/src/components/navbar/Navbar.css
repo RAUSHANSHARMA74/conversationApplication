@@ -6,6 +6,7 @@
 
 .userNavbar {
   /* border: 1px solid red; */
+  border-bottom: 1px solid grey;
   background-color: #4f3f5c;
   display: flex;
   justify-content: space-between;
@@ -118,7 +119,7 @@
 }
 
 .notificationDetail {
-  
+  /* border: 1px solid red; */
   position: relative;
 }
 
@@ -225,53 +226,68 @@
 @media screen and (max-width: 600px) {
   .userNavbar{
     /* border: 1px solid #076deb; */
-    padding: 5px 0px;
-    z-index: 3;
+    padding: 2px 5px;
+    z-index: 2;
   }
   .leftNavbar {
+    /* border: 1px solid red; */
     width: auto;
     padding: 0px;
     font-size: 12px;
   }
   .rightNavbar {
+    /* border: 1px solid red; */
     width: auto;
-    position: relative;
+    position: absolute;
+    right: -2px;
+    bottom: -96vh;
+    padding: 5px 0px;
+    /* bottom:; */
   }
   .logoIcons {
     border: 1px solid grey;
+    border-radius: 10px ;
     background-color: #4f3f5c;
     position: absolute;
-    flex-direction: column;
-    top: 4vh;
-    width: 50px;
-    height: 150px;
-    right: -15px;
-    padding: 15px 0px;
-    transform: translateX(100%);
+    justify-content: space-around;
+    width:47vh;
+    height: 25px;
+    right: 52px;
+    /* bottom: 2px; */
+    padding: 10px 0px;
+    transform: translatey(110%);
     transition: all 0.5s;
   }
   .logoIcons.active {
     transform: translate(0);
   }
   .logoIcons .ai{
-    font-size: 20px;
+    font-size: 25px;
   }
   .toggleNav {
     /* border:1px solid red; */
-    font-size: 20px;
+    font-size: 30px;
     display: block;
+    /* position: absolute; */
+    background-color: #076deb;
+    padding: 5px 10px;
+    bottom: 0px;
+    border-radius: 15px 15px 15px 0px;
   }
+  
   .allUsersName {
-    
-    top: 30px;
-    right: 40px;
-    width: 300px;
+    background-color:#4f3f5c;
+    bottom: 0px;
+    left: -13.5vh;
+    top: -62vh;
+    width: 54.5vh;
     height: 400px;
   }
-  .allUsersNameSended {
-    top: 30px;
-    right: 40px;
-    width: 300px;
+  .allUsersNameSended{
+    bottom: 0px;
+    right: -21.5vh;
+    top: -62vh;
+    width: 54.5vh;
     height: 400px;
   }
   .userSended button{
