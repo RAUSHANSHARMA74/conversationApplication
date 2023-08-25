@@ -243,7 +243,7 @@
     width: auto;
     position: absolute;
     right: -2px;
-    bottom: -96vh;
+    bottom: -90vh;
     padding: 5px 0px;
     /* bottom:; */
   }
@@ -258,7 +258,7 @@
     right: 52px;
     /* bottom: 2px; */
     padding: 10px 0px;
-    transform: translatey(110%);
+    transform: translatey(200%);
     transition: all 0.5s;
   }
   .logoIcons.active {
@@ -281,16 +281,16 @@
   .allUsersName {
     background-color:#4f3f5c;
     bottom: 0px;
-    left: -13.5vh;
+    left: -11vh;
     top: -62vh;
-    width: 54.5vh;
+    width: 48vh;
     height: 400px;
   }
   .allUsersNameSended{
     bottom: 0px;
-    right: -21.5vh;
+    right: -19vh;
     top: -62vh;
-    width: 54.5vh;
+    width: 50vh;
     height: 400px;
   }
   .userSended button{
