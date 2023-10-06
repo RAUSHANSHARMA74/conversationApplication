@@ -3,7 +3,7 @@ const passport = require("passport");
 const session = require("express-session");
 const jwt = require("jsonwebtoken")
 const {ChatUserModel} = require("../model/userModel")
-// const {sendMail} = require("../mail/sendMail")
+const {sendMail} = require("../mail/sendMail")
 const GitHubStrategy = require("passport-github2").Strategy;
 const githubLoginRouter = express.Router();
 require("dotenv").config();
@@ -96,6 +96,7 @@ githubLoginRouter.get(
     const token = req.user; 
     // res.redirect("/auth/fail");
     // res.redirect(`/Login/?token=${token}`);
+    sendMail(userEmail, userName)
     res.redirect(`${process.env.REDIRECT_FRONTEND}/Login/?token=${token}`);
   }
 );

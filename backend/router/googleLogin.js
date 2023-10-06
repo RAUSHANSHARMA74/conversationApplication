@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
+const {sendMail} = require("../mail/sendMail")
 const { ChatUserModel } = require("../model/userModel");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const googleLoginRouter = express.Router();
@@ -92,6 +93,7 @@ googleLoginRouter.get(
   (req, res) => {
     const token = req.user; 
     // res.redirect(`http://localhost:3000/Login/?token=${token}`);
+    sendMail(userEmail, userName)
     res.redirect(`${process.env.REDIRECT_FRONTEND}/Login/?token=${token}`);
   }
 );

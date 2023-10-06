@@ -15,20 +15,22 @@ async function sendMail(userEmail, friendName) {
     const mailOptions = {
       from: process.env.clientEmail,
       to: userEmail,
-      subject: "🎉 Let's ROFL Together! 🤣",
+      Subject: "Welcome to Our Conversation Application!",
       text: `
-      Hey ${friendName},
+       Dear ${friendName},
 
-      I couldn't wait to show you this! 😄 Look at the hilarious meme I found:
+       We're thrilled to welcome you to our conversation application! Thank you for choosing us as your platform 
+       for meaningful discussions and engaging conversations. We're confident that you'll find our application to 
+       be a valuable tool for connecting with others and sharing your thoughts
       
-      1. https://youtube.com/shorts/VXs4-LGi05U?feature=share
-      2. https://youtube.com/shorts/iFROchN0Szc?feature=share
-      
-      Hope it brings a smile to your face!
-      
-      Chat soon,
-      
-      Prince😎
+       We're excited to have you as part of our community and look forward to seeing the conversations you'll 
+       start and join. Your unique perspective and insights will contribute to making our platform even better.
+
+       Thank you for choosing our conversation application. Let the conversations begin!
+       
+       Warm regards,
+
+       Raushan Sharma
       `,
     };
 
