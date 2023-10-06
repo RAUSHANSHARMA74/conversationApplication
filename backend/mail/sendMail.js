@@ -15,22 +15,23 @@ async function sendMail(userEmail, friendName) {
     const mailOptions = {
       from: process.env.clientEmail,
       to: userEmail,
-      Subject: "Welcome to Our Conversation Application!",
+      subject: "Welcome to Our Conversation Application!",
       text: `
-       Dear ${friendName},
+      Subject: Welcome to Our Conversation Application! 🎉
 
-       We're thrilled to welcome you to our conversation application! Thank you for choosing us as your platform 
-       for meaningful discussions and engaging conversations. We're confident that you'll find our application to 
-       be a valuable tool for connecting with others and sharing your thoughts
+      Dear ${friendName},
       
-       We're excited to have you as part of our community and look forward to seeing the conversations you'll 
-       start and join. Your unique perspective and insights will contribute to making our platform even better.
-
-       Thank you for choosing our conversation application. Let the conversations begin!
-       
-       Warm regards,
-
-       Raushan Sharma
+      We are absolutely delighted to have you join our conversation application! 🙌 Thank you for selecting us as your preferred platform for meaningful discussions and engaging conversations. Your decision reflects your commitment to fostering rich dialogues, and we couldn't be more thrilled to have you on board.
+      
+      We have every confidence that you will find our application to be an invaluable tool for connecting with others and sharing your thoughts. Whether you're starting discussions or joining existing ones, your participation will undoubtedly enrich the community.
+      
+      Your unique perspective and insights are like the missing puzzle pieces that will help us create a more vibrant and dynamic platform. We genuinely appreciate your contribution, and we eagerly anticipate the thought-provoking conversations you'll initiate.
+      
+      Once again, thank you for choosing our conversation application to be your hub for dialogue and discourse. Let's kickstart these conversations and make this community thrive!
+      
+      Warm regards,
+      
+      Raushan Sharma 🚀
       `,
     };
 
