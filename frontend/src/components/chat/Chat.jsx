@@ -8,10 +8,13 @@ import { FcGallery, FcDocument } from "react-icons/fc";
 import socket from "../socketConnection/SocketConnection"
 
 
-function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
+const videoCallUrl = "/videoCalling";
+
+
+function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId, userDetail }) {
     const chatContainerRef = useRef(null);
-    const [video, setVideo] = useState(false)
-    const [call, setCall] = useState(true)
+    // const [video, setVideo] = useState(false)
+    // const [call, setCall] = useState(true)
     const [messages, setMessages] = useState([])
     const [receiveUser, setReceiveUser] = useState({})
     const [inputValue, setInputValue] = useState("");
@@ -20,6 +23,7 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
     const [zoom, setZoom] = useState(1);
     const [bigImage, setBigImage] = useState("")
     const [openFile, setOpenFile] = useState(false)
+
 
 
     useEffect(() => {
@@ -37,8 +41,12 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
         const selectedFile = event.target.files[0];
         event.target.value = null;
         if (selectedFile) {
-            const imageUrl = URL.createObjectURL(selectedFile);
-            socket.emit('sendMessage', { connectionId: id, "type": "image", content: imageUrl });
+            // const imageUrl = URL.createObjectURL(selectedFile);
+            // console.log("it is without formdata",selectedFile)
+            const formData = new FormData();
+            formData.append('image', selectedFile);
+            // console.log(formData)
+            socket.emit('sendMessage', { connectionId: id, "type": "image", content: formData });
         }
     };
 
@@ -68,6 +76,27 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
         setInputValue(prevValue => prevValue + emojiObject.emoji);
     };
 
+    const handleReceiveVedioCall = (data) => {
+        const currentUserId = userDetail._id
+        const { currentReceiveUserId, randomId } = data
+        const receiverId = currentReceiveUserId.receiver
+        const senderId = currentReceiveUserId.sender
+        // console.log(receiverId, senderId, randomId )
+
+        if (receiverId == currentUserId) {
+            localStorage.setItem("RoomID", randomId)
+            window.location.href = videoCallUrl;
+
+        } else if (senderId == currentUserId) {
+            localStorage.setItem("RoomID", randomId)
+            window.location.href = videoCallUrl;
+
+        }
+    }
+    socket.on("receiveVideoCall", handleReceiveVedioCall)
+
+
+
     useEffect(() => {
         socket.emit('messageOfUserId', userId);
         socket.on('getAllMessages', (data) => {
@@ -76,9 +105,20 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
         });
 
         socket.on('receiveMessage', (data) => {
-            let lastMessage = data[data.length - 1]
-            setMessages((prevMessages) => [...prevMessages, lastMessage]);
+            const currentUserId = userDetail._id
+            const { messages, receiver, sender } = data
+            if (receiver == currentUserId) {
+                let lastMessage = messages[messages.length - 1]
+                setMessages((prevMessages) => [...prevMessages, lastMessage]);
+            } else if (sender == currentUserId) {
+                let lastMessage = messages[messages.length - 1]
+                setMessages((prevMessages) => [...prevMessages, lastMessage]);
+            }
+
         });
+
+
+
 
         return () => {
             socket.off('receiveMessage');
@@ -112,11 +152,19 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
         }
     };
 
-
-
     const handleDoubleClick = () => {
         setZoom(zoom === 1 ? 1.5 : 1);
     };
+
+    const handleAudioCall = () => {
+        console.log("audio")
+    }
+
+    const handleVideoCall = () => {
+        const connectionId = receiveUser._id
+        socket.emit("videoCall", connectionId)
+    }
+
 
     return (
 
@@ -125,7 +173,7 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
                 <img
                     src={bigImage}
                     alt=""
-                    style={{ transform: `scale(${zoom})` }} 
+                    style={{ transform: `scale(${zoom})` }}
                 />
             </div>
             <div className="chatWithPersonalUser"
@@ -135,10 +183,10 @@ function Chat({ userChat, userPhoto, setUserChat, userId, onlineUserId }) {
                     <span className="showOnlineUser">
                         {checkOnline ? <span style={{ color: "#11ede6" }}>Online</span> : <span style={{ color: "#ed115a" }}>Offline</span>}
                     </span>
-                    {video ? <BsCameraVideo className="ai" /> : <BsCameraVideoOff className="ai" />}
+                    {checkOnline ? <BsCameraVideo onClick={handleVideoCall} className="ai" /> : <BsCameraVideoOff className="ai" />}
 
-                    {call ? <BsTelephoneX className="ai" /> : <BsTelephone className="ai" />}
-                    
+                    {checkOnline ? <BsTelephone onClick={handleAudioCall} className="ai" /> : <BsTelephoneX className="ai" />}
+
                     <BsArrowLeft className="ai leftarrow" onClick={() => setUserChat(!userChat)} />
 
                 </div>

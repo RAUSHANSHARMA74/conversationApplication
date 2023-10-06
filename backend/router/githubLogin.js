@@ -95,7 +95,7 @@ githubLoginRouter.get(
   (req, res) => {
     const token = req.user; 
     // res.redirect("/auth/fail");
-    // res.redirect(`http://localhost:3000/Login/?token=${token}`);
+    // res.redirect(`/Login/?token=${token}`);
     res.redirect(`${process.env.REDIRECT_FRONTEND}/Login/?token=${token}`);
   }
 );

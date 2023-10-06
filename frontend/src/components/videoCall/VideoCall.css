@@ -1,0 +1,58 @@
+/* Styling for the video call container */
+.video-call-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling for call action buttons */
+  .video-call-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .video-call-controls button {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .video-call-controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for video streams */
+  .video-streams {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .local-video,
+  .remote-video {
+    width: 320px;
+    height: 240px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #000;
+  }
+  
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

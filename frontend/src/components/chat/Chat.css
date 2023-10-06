@@ -313,7 +313,7 @@
   }
 
   .choosefile{
-    bottom: 45px;
+    bottom: 55px;
     width: 150px;
     left: 0px;
     border-radius: 5px;
@@ -336,8 +336,8 @@
 
   .EmojiPicker {
     position: absolute;
-    bottom: 15vh;
-    left:3%;
+    bottom: 65px;
+    left: 5px;
     font-size: 10px;
     transform: translateX(-100%);
     transition: all 0.5s;
@@ -379,11 +379,11 @@
   }
 
   .sendMessage .ai {
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .sendMessage input {
-    width: 65%;
+    width: 68%;
     font-size: 15px;
     padding: 1px;
     padding-left: 15px;

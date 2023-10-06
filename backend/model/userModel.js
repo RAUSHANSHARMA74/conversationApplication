@@ -17,7 +17,7 @@ const messageSchema = mongoose.Schema({
     id: {type : String,  required : true},
     fileName : {type : String,  required : false},
     type : {type : String,  required : true},
-    content: {type: String, required : true},
+    content: {type: Object , required : true},
     time: { type: Date, default: Date.now } // Use the appropriate data type
   }]
 });

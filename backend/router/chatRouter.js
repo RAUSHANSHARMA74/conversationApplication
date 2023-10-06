@@ -1,6 +1,7 @@
 const express = require("express");
 const { socketAuthorization } = require("../middleware/socketAuthentication");
 const { ChatUserModel, MessageModel } = require("../model/userModel");
+const { uuid } = require('uuidv4');
 const app = express();
 require("dotenv").config()
 const http = require("http");
@@ -276,11 +277,29 @@ io.on("connection", async (socket) => {
         },
         { new: true }
       );
-      io.emit("receiveMessage", saveMessage.messages);
+     
+      io.emit("receiveMessage", saveMessage);
     } catch (error) {
       console.log("Something went wrong in sending message:", error);
     }
   });
+
+  socket.on("videoCall", async (data)=>{
+    const currentReceiveUserId = await MessageModel.findById(data)
+    io.emit("receiveVideoCall", {currentReceiveUserId, randomId :uuid()})
+  })
+
+  socket.on('join-room' , (RoomID , userID) => {
+    // const {RoomID,userID} = data
+    console.log(RoomID , userID);
+    socket.join(RoomID)
+    socket.to(RoomID).emit('user-join' , userID)
+
+    socket.on('disconnect' , () => {
+        socket.to(RoomID).emit('user-disconnected', userID)
+    })
+})
+
   
   socket.on('userLogin', () => {
     allUsersStatus.push({ userDetailId, status: true });

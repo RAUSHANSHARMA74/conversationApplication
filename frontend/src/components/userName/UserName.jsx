@@ -1,8 +1,28 @@
 import { useState } from "react";
 import "./UserName.css";
+import socket from "../socketConnection/SocketConnection"
 
 
-function UserName({ userChat, setUserPhoto, setUserChat, friends, setUserId, onlineUserId }) {
+
+function UserName({ userChat, setUserPhoto, setUserChat, friends, setUserId, onlineUserId, setConnectionId, userDetail }) {
+    
+    const handleReceiveVedioCall = (data) =>{
+        const currentUserId = userDetail._id
+        const {currentReceiveUserId, randomId} = data
+        const receiverId = currentReceiveUserId.receiver
+        const senderId = currentReceiveUserId.sender
+        // console.log(receiverId, senderId, randomId )
+
+        if(receiverId == currentUserId){
+        setConnectionId(randomId)
+        }else if (senderId == currentUserId){
+        setConnectionId(randomId)
+        }
+    }
+    socket.on("receiveVideoCall", handleReceiveVedioCall)
+
+
+
     return (
         <div className="allYourFriendName">
             <div className="onlineUsers">

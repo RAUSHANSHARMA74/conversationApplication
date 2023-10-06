@@ -102,12 +102,15 @@
   }
   .allYourFriendName {
     /* border: 1px solid red; */
-    width: 100%;
+    width: 97%;
+    margin: auto;
     margin-top: 8vh;
     z-index: 1;
   }
 
   .allFriends {
+    /* border: 1px solid red; */
+    min-height: 86vh;
     max-height: 86vh; 
   }
 
